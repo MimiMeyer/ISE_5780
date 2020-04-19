@@ -1,6 +1,6 @@
 package geometries;
-import Primitives.Point3D;
-import Primitives.Vector;
+import primitives.Point3D;
+import primitives.Vector;
 /*
 interface for all Geometries with getNormal
 */

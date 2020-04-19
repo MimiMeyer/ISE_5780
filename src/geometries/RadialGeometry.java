@@ -1,5 +1,5 @@
 package geometries;
-import static Primitives.Util.isZero;
+import static primitives.Util.isZero;
 
 public abstract class RadialGeometry implements Geometry {
 

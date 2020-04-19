@@ -4,8 +4,8 @@
 
 package geometries;
 
-import Primitives.Point3D;
-import Primitives.Vector;
+import primitives.Point3D;
+import primitives.Vector;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -82,7 +82,7 @@ public class PolygonTest {
     }
 
     /**
-     * Test method for {@link geometries.Polygon#getNormal(Primitives.Point3D)}.
+     * Test method for {@link geometries.Polygon#getNormal(primitives.Point3D)}.
      */
     @Test
     public void testGetNormal() {

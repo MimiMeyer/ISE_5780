@@ -1,6 +1,6 @@
 //Mimi Meyer 317924835
 // Odelia Sfez 342472966
-package Primitives;
+package primitives;
 
 import org.junit.jupiter.api.Test;
 

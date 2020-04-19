@@ -3,8 +3,8 @@
 package geometries;
 
 import org.junit.jupiter.api.Test;
-import Primitives.Point3D;
-import Primitives.Vector;
+import primitives.Point3D;
+import primitives.Vector;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TriangleTest extends Object {

@@ -1,11 +1,11 @@
 package geometries;
 
-import Primitives.Point3D;
-import Primitives.Vector;
-import Primitives.Ray;
+import primitives.Point3D;
+import primitives.Vector;
+import primitives.Ray;
 
-import static Primitives.Util.alignZero;
-import static Primitives.Util.isZero;
+import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
 public class Cylinder extends Tube {
  double _height;
 /***constructer***/

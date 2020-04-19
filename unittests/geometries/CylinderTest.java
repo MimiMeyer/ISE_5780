@@ -1,9 +1,9 @@
 //Mimi Meyer 317924835
 // Odelia Sfez 342472966
 package geometries;
-import Primitives.Point3D;
-import Primitives.Vector;
-import Primitives.Ray;
+import primitives.Point3D;
+import primitives.Vector;
+import primitives.Ray;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 public class CylinderTest extends Object {

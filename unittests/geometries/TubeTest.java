@@ -2,9 +2,9 @@
 // Odelia Sfez 342472966
 package geometries;
 
-import Primitives.Point3D;
-import Primitives.Ray;
-import Primitives.Vector;
+import primitives.Point3D;
+import primitives.Ray;
+import primitives.Vector;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

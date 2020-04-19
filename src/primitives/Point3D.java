@@ -1,4 +1,4 @@
-package Primitives;
+package primitives;
 
 public class Point3D {
     Coordinate _x;

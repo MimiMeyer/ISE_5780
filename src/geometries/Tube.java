@@ -1,7 +1,7 @@
 package geometries;
 
-import Primitives.*;
-import static Primitives.Util.isZero;
+import primitives.*;
+import static primitives.Util.isZero;
 
 public class Tube extends RadialGeometry {
    Ray _axisRay;
