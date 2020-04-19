@@ -1,8 +1,6 @@
 package geometries;
 
-import Primitives.Point3D;
-import Primitives.Ray;
-import Primitives.Vector;
+import Primitives.*;
 import static Primitives.Util.isZero;
 
 public class Tube extends RadialGeometry {
