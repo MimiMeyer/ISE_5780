@@ -1,16 +1,24 @@
 package geometries;
 
-import primitives.*;
+import primitives.Point3D;
+import primitives.Ray;
+import primitives.Vector;
+import java.util.List;
+
 import static primitives.Util.isZero;
 
 public class Tube extends RadialGeometry {
-   Ray _axisRay;
+
+   protected final Ray _axisRay;
 /***constructer***////
-    public Tube(double _radius, Ray _axisRay) {
-        super(_radius);
-        this._axisRay = _axisRay;
-    }
-/***getter****/
+
+public Tube(double _radius, Ray _axisRay)
+{
+    super(_radius);
+    this._axisRay = new Ray(_axisRay);
+}
+
+    /***getter****/
     public Ray get_axisRay() {
         return _axisRay;
     }
@@ -42,7 +50,15 @@ public class Tube extends RadialGeometry {
         //This vector is orthogonal to the _direction vector.
         Vector check = point.subtract(o);
         return check.normalize();
-    }
 
     }
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
+    }
+
+
+
+
+}
 

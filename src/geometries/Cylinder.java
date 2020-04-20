@@ -1,8 +1,10 @@
 package geometries;
 
 import primitives.Point3D;
-import primitives.Vector;
 import primitives.Ray;
+import primitives.Vector;
+
+import java.util.List;
 
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
@@ -45,6 +47,10 @@ public class Cylinder extends Tube {
 
         o = o.add(v.scale(t));
         return point.subtract(o).normalize();
+    }
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return super.findIntersections(ray);
     }
     }
 
