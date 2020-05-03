@@ -38,7 +38,7 @@ class TriangleTest extends Object {
         assertEquals(expectList,l);
 
         //case 2
-        //the ray intersects with plane but outside the triangle against edge
+        //the ray intersects with plane but outside the triangle against  edge
         r=new Ray(new Point3D(1.0,-5.0,4.0),new Vector(3.0,0.0,-1.0));
         l=t.findIntersections(r);
         assertEquals(null,l);

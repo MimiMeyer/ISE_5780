@@ -67,6 +67,13 @@ public class Point3D {
     public Vector subtract(Point3D other){
         return new Vector(new Point3D(this._x._coord-other._x.get(),this._y._coord-other._y.get(),this._z._coord-other._z.get()));
     }
+    public Point3D subtract(Vector v) {
+        return new Point3D(this._x._coord - v._head._x._coord,
+                this._y._coord - v._head._y._coord,
+                this._z._coord - v._head._z._coord);
+    }
+
+
     /******add******/
     public Point3D add(Vector other){
         return new Point3D(this._x._coord +other._head._x._coord, this._y._coord + other._head._y._coord, this._z._coord + other._head._z._coord);
