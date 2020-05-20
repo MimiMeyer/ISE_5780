@@ -1,8 +1,8 @@
 
 package geometries;
 
-import primitives.Point3D;
 import primitives.Ray;
+
 import java.util.ArrayList;
 import java.util.List;
 /* class Geometries is a class that represents the basic geometries*/
@@ -39,14 +39,14 @@ import java.util.List;
      * @return list of Point3D that intersect the osef
      */
         @Override
-        public List<Point3D> findIntersections(Ray ray) {
-            List<Point3D> intersections = null;
+        public List<GeoPoint> findIntersections(Ray ray,double maxDistance) {
+            List<GeoPoint> intersections = null;
 
             for (Intersectable geometry : _geometries) {
-                List<Point3D> tempIntersections = geometry.findIntersections(ray);
+                List<GeoPoint> tempIntersections = geometry.findIntersections(ray,maxDistance);
                 if (tempIntersections != null) {
                     if (intersections == null)
-                        intersections = new ArrayList<Point3D>();
+                        intersections = new ArrayList<GeoPoint>();
                     intersections.addAll(tempIntersections);
                 }
             }

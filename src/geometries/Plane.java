@@ -1,19 +1,21 @@
 package geometries;
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
+import primitives.*;
+
 import java.util.List;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
-public class Plane implements Geometry {
-    Point3D point;
+public class Plane extends Geometry {
+    Point3D _point;
     primitives.Vector _normal;
 
 
     /***constructer***/
-    public Plane(Point3D p1, Point3D p2, Point3D p3) {
-        point= new Point3D(p1);
+    public Plane(Color emmission, Material material,Point3D p1, Point3D p2, Point3D p3) {
+        this._emmission = new Color(emmission);
+        this._material= material;
+
+        this._point = new Point3D(p1);
 
         Vector U = new Vector(p1, p2);
         Vector V = new Vector(p1, p3);
@@ -23,11 +25,27 @@ public class Plane implements Geometry {
         _normal = N;
     }
 
-    public Plane(Point3D point, Vector _normal) {
-        this.point = new Point3D(point);
-        this._normal = new Vector(_normal);
+    public Plane(Color emmission, Point3D p1, Point3D p2, Point3D p3) {
+        this(emmission,new Material(1,0,0),p1,p2,p3);
     }
 
+    public Plane(Point3D p1, Point3D p2, Point3D p3) {
+        this(Color.BLACK,new Material(1,0,0),p1,p2,p3);
+    }
+
+    public Plane(Point3D point, Vector normal) {
+        this(Color.BLACK, new Material(1.0, 0, 0), point, normal);
+    }
+
+    public Plane(Color emission, Point3D point, Vector normal) {
+        this(emission, new Material(1.0, 0, 0), point, normal);
+    }
+
+    public Plane(Color emmission, Material material, Point3D point, Vector _normal) {
+        super(emmission, material);
+        this._point = point;
+        this._normal = _normal;
+    }
 
     /***getnormal*****/
     @Override
@@ -35,30 +53,26 @@ public class Plane implements Geometry {
         return _normal.normalized();
     }
     public Vector getNormal() {
-        return getNormal(new Point3D(0.0,0.0,0.0));
+        return getNormal(null);
     }
 /***getters*****/
     public Point3D getPoint() {
-        return point;
-    }
-
-    public Vector get_normal() {
-        return _normal;
+        return new Point3D(_point);
     }
 /******tostring******/
     @Override
     public String toString() {
         return "Plane{" +
-                "point=" + point +
+                "point=" + _point +
                 ", _normal=" + _normal +
                 '}';
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray,double maxDistance) {
         Vector p0Q;
         try {
-            p0Q = point.subtract(ray.getPoint());
+            p0Q = _point.subtract(ray.getPoint());
         } catch (IllegalArgumentException e) {
             return null; // ray starts from point Q - no intersections
         }
@@ -69,6 +83,6 @@ public class Plane implements Geometry {
 
         double t = alignZero(_normal.dotProduct(p0Q) / nv);
 
-        return t <= 0 ? null : List.of(ray.getTargetPoint(t));
+        return t <= 0 ? null : List.of(( new GeoPoint(this, ray.getTargetPoint(t))));
     }
 }

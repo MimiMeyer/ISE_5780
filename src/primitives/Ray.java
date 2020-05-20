@@ -54,6 +54,9 @@ public class Ray {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+        if (!(o instanceof Ray)) {
+            return false;
+        }
         if (o == null || getClass() != o.getClass()) return false;
         Ray ray = (Ray) o;
         return _p0.equals( ray._p0) &&

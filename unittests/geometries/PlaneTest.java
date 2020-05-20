@@ -1,38 +1,44 @@
-//Mimi Meyer 317924835
-// Odelia Sfez 342472966
 package geometries;
 
+import org.junit.jupiter.api.Test;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
-import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-public class PlaneTest extends Object {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class PlaneTest {
+
     /**
-     * Test method for plane getNormal(Point3D point)
+     * Test method for Plane getNormal(Point3D point)
      */
     @Test
-    public void getNormal() {
-        Plane p=new Plane(new Point3D(2.0,0.0,2.0),new Vector(0.0,1.0,0.0));
-        assertEquals(p.getNormal(new Point3D(8.0,0.0,4.0)),new Vector(new Point3D(0.0,1.0,0.0)));
-        assertEquals(p.getNormal(new Point3D(90.0,0.0,7.0)),new Vector(new Point3D(0.0,1.0,0.0)));
+    void getNormalTest() {
+        Plane p=new Plane(new Point3D(0.0,2.0,2.0), new Vector(1.0,0.0,0.0));
+
+        // ============ Equivalence Partitions Tests ==============
+        //there is only one part to test- points that are on the plane
+
+        assertEquals(p.getNormal(new Point3D(0.0,9.0,4.0)),(new Vector(new Point3D(1.0,0.0,0.0))));
+        assertEquals(p.getNormal(new Point3D(0.0,50.0,3.0)),(new Vector(new Point3D(1.0,0.0,0.0))));
+        assertEquals(p.getNormal(new Point3D(0.0,7.8,4.0)),(new Vector(new Point3D(1.0,0.0,0.0))));
     }
+
     @Test
-    void findIntersections(){
-        Plane p=new Plane( new Point3D(0.0,2.0,2.0),new Vector(1.0,0.0,0.0));
+    void findIntersectionsTest(){
+        Plane p=new Plane(new Point3D(0.0,2.0,2.0), new Vector(1.0,0.0,0.0));
 
         // ============ Equivalence Partitions Tests ==============
 
         //part 1- the ray intersects the plane:
-        Ray r=new Ray(new Point3D(6.0,4.0,3.0), new Vector(-1.0,1.0,1.0));
-        List<Point3D> l=p.findIntersections(r);
+        Ray r=new Ray(new Point3D(4.0,2.0,1.0), new Vector(-1.0,1.0,1.0));
+        List<Intersectable.GeoPoint> l=p.findIntersections(r);
         List<Point3D> expectList=new ArrayList<Point3D>();
-        expectList.add(new Point3D(0.0,10.0,9.0));
-        assertEquals(expectList,l);
+        expectList.add(new Point3D(0.0,6.0,5.0));
+        assertEquals(expectList,List.of(l.get(0).getPoint()));
 
         //part 2- the ray does not intersect the plane:
         r=new Ray(new Point3D(4.0,2.0,1.0),new Vector(5.0,-2.0,2.0));
@@ -41,6 +47,7 @@ public class PlaneTest extends Object {
 
         // =============== Boundary Values Tests ==================
 
+        //ray is parallel to plane:
         //case 1: ray is not included in plane:
         r=new Ray(new Point3D(4.0,-1.0,1.0),new Vector(0.0,2.0,0.0));
         l=p.findIntersections(r);
@@ -51,6 +58,13 @@ public class PlaneTest extends Object {
         l=p.findIntersections(r);
         assertEquals(null,l);
 
+        //ray is orthogonal to plane:
+        //case 1:
+
+        //case 2:
+
+        //case 3:
+
         //Ray is neither orthogonal nor parallel to the plane and begins in
         //the same point which appears as reference point in the plane:
         r=new Ray(new Point3D(0.0,2.0,2.0),new Vector(5.0,3.0,1.0));
@@ -58,3 +72,8 @@ public class PlaneTest extends Object {
         assertEquals(null,l);
     }
 }
+
+
+
+
+

@@ -3,26 +3,27 @@ package geometries;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
+
 import java.util.List;
 
 import static primitives.Util.isZero;
 
 public class Tube extends RadialGeometry {
 
-   protected final Ray _axisRay;
-/***constructer***////
+    protected final Ray _axisRay;
 
-public Tube(double _radius, Ray _axisRay)
-{
-    super(_radius);
-    this._axisRay = new Ray(_axisRay);
-}
+    /***constructer***////
+    public Tube(double _radius, Ray _axisRay) {
+        super(_radius);
+        this._axisRay = new Ray(_axisRay);
+    }
 
     /***getter****/
     public Ray get_axisRay() {
         return _axisRay;
     }
-/***tostring****/
+
+    /***tostring****/
     @Override
     public String toString() {
         return "Tube{" +
@@ -41,8 +42,7 @@ public Tube(double _radius, Ray _axisRay)
 
         //We need the projection to multiply the _direction unit vector
         double projection = vector1.dotProduct(v);
-        if(!isZero(projection))
-        {
+        if (!isZero(projection)) {
             // projection of P-O on the ray:
             o = o.add(v.scale(projection));
         }
@@ -52,12 +52,20 @@ public Tube(double _radius, Ray _axisRay)
         return check.normalize();
 
     }
+
+    /**
+     * find all intersections of received ray with the sphere
+     *
+     * @param ray
+     * @return list of GeopPoints- intersection points with the sphere
+     */
+
+
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray, double maxDistance) {
+        //TODO implements here
         return null;
     }
-
-
 
 
 }

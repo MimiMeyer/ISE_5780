@@ -1,17 +1,53 @@
 package geometries;
 
-import primitives.Point3D;
 import primitives.*;
-import java.util.List;
-import static primitives.Util.isZero;
 
-public class Triangle extends Polygon {
-    public Triangle(Point3D... vertices) {
-        super(vertices);
+import java.util.List;
+
+import static primitives.Util.*;
+
+/**
+ * Class Triangle is the basic class representing a triangle- extends Polygon class- it is a polygon with three vertices.
+ * As a result this class also implements the Geometry interface.
+ * @author Aviya and Sima
+ */
+public final class Triangle extends Polygon {
+    /**
+     * Triangle constructor that receives the values for three triangle vertices
+     *
+     * @param _p1 first vertice
+     * @param _p2 second vertice
+     * @param _p3 third vertice
+     */
+    public Triangle(Point3D _p1, Point3D _p2, Point3D _p3) {
+        super(_p1, _p2, _p3);
     }
+
+    public Triangle(Color _emmission, Point3D _p1, Point3D _p2, Point3D _p3) {
+        super(_emmission, _p1, _p2, _p3);
+    }
+
+    public Triangle(Color _emmission, Material _material, Point3D _p1, Point3D _p2, Point3D _p3) {
+        this(_emmission, _p1, _p2, _p3);
+        this._material = _material;
+    }
+
+    /**
+     * @return string containing triangle details
+     */
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
-        List<Point3D> intersections = _plane.findIntersections(ray);
+    public String toString() {
+        return "Triangle{ super: " + super.toString() + " }";
+    }
+
+    /**
+     * find all intersections of received ray with the triangle
+     * @param ray
+     * @return list of GeopPoints- intersection points with the triangle
+     */
+    @Override
+    public List<GeoPoint> findIntersections(Ray ray,double maxDistance) {
+        List<GeoPoint> intersections = _plane.findIntersections(ray,maxDistance);
         if (intersections == null) return null;
 
         Point3D p0 = ray.getPoint();
@@ -28,7 +64,10 @@ public class Triangle extends Polygon {
         double s3 = v.dotProduct(v3.crossProduct(v1));
         if (isZero(s3)) return null;
 
-        return ((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0)) ? intersections : null;
-
+        if ((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0)) {
+            intersections.get(0).geometry = this;
+            return intersections;
+        }
+        return null;
     }
 }

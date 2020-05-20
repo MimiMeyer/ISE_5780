@@ -1,5 +1,3 @@
-//Mimi Meyer 317924835
-// Odelia Sfez 342472966
 package geometries;
 
 import org.junit.jupiter.api.Test;
@@ -9,18 +7,18 @@ import primitives.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GeometriesTest extends Object {
+class GeometriesTest {
 
     @Test
-    void findIntersections() {
+    void findIntsersections() {
         Geometries geometries = new Geometries();
 
         // =============== Boundary Values Tests ==================
         //TC01: empty geometries list
-        assertNull(geometries.findIntersections(new Ray(new Point3D(1.0,2.0,0.0), new Vector(3.0,5.0,4.0))));
+        assertNull(geometries.findIntersections(new Ray(new Point3D(0.0,1.0,0.0), new Vector(1.0,0.0,5.0))));
 
-        geometries.add(new Plane( new Point3D(2.0,1.0,0.0),new Vector(0.0,0.0,7.0)));
-        geometries.add(new Triangle(new Point3D(1.0,0.0,0.0), new Point3D(0.0,6.0,0.0), new Point3D(0.0,0.0,1.0)));
+        geometries.add(new Plane(new Point3D(1.0,1.0,0.0), new Vector(0.0,0.0,1.0)));
+        geometries.add(new Triangle(new Point3D(1.0,0.0,0.0), new Point3D(0.0,1.0,0.0), new Point3D(0.0,0.0,1.0)));
         geometries.add(new Sphere(1.0, new Point3D(1.0, 0.0, 0.0)));
 
         //TC02: each geometry does'nt have intersection points
@@ -31,7 +29,7 @@ class GeometriesTest extends Object {
 
         //TC04: all of the geometries have intersection points
         Geometries all_geometries = new Geometries();
-        all_geometries.add(new Plane(new Point3D(0.0,1.0,2.0),new Vector(0.0,-1.0,0.0)));
+        all_geometries.add(new Plane(new Point3D(0.0,1.0,2.0), new Vector(0.0,-1.0,0.0)));
         all_geometries.add(new Triangle(new Point3D(0.4,3.0,1.0), new Point3D(0.0,3.0,1.0), new Point3D(2.0,3.0,5.0)));
         all_geometries.add(new Sphere(1.0, new Point3D(0.0,5.0,1.0)));
         assertEquals( 3.0,all_geometries.findIntersections(new Ray(new Point3D(Point3D.ZERO), new Vector(0.0, 5.0, 1.0))).size());
@@ -40,6 +38,5 @@ class GeometriesTest extends Object {
         // ============ Equivalence Partitions Tests ==============
         //TC11: part of the geometries has intersection points
         assertEquals( 2, geometries.findIntersections(new Ray(new Point3D(1.0,0.0,-1.0), new Vector(0.0,0.0,1.0))).size());
-
     }
 }
