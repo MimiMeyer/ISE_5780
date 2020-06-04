@@ -15,7 +15,13 @@ double _kC,_kL,kQ;
         this._kL = _kL;
         this.kQ = kQ;
     }
-
+    public PointLight(Color colorIntensity, Point3D position) {
+        this(colorIntensity, position, 1d, 0d, 0d);
+    }
+    @Override
+    public Color getIntensity() {
+        return super.getIntensity();
+    }
     @Override
     public Color getIntensity(Point3D p) {
         double dsquared = p.distanceSquared(_position);
@@ -31,5 +37,9 @@ double _kC,_kL,kQ;
         } else {
             return p.subtract(_position).normalize();
         }
+    }
+    @Override
+    public double getDistance(Point3D point) {
+        return _position.distance(point);
     }
 }

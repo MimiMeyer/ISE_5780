@@ -32,12 +32,15 @@ public class Camera {
     public Camera(Point3D _p0, Vector _vTo, Vector _vUp) {
 
         //if the the vectors are not orthogonal, throw exception.
-        if(Util.isZero(_vTo.dotProduct(_vUp))){
-            this._p0 =  new Point3D(_p0);
-            this._vTo = _vTo.normalized();
-            this._vUp = _vUp.normalized();
-            _vRight = _vTo.crossProduct(_vUp).normalized();
-        }
+        if (_vUp.dotProduct(_vTo) != 0)
+            throw new IllegalArgumentException("the vectors must be orthogonal");
+
+        this._p0 = new Point3D(_p0);
+        this._vTo = _vTo.normalized();
+        this._vUp = _vUp.normalized();
+
+        _vRight = this._vTo.crossProduct(this._vUp).normalize();
+
     }
 
     public Ray constructRayThroughPixel(int nX, int nY, int j, int i, double screenDistance,

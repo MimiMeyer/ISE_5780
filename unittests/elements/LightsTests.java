@@ -41,7 +41,7 @@ public class LightsTests {
                 new Vector(1, -1, 1)));
 
         ImageWriter imageWriter = new ImageWriter("sphereDirectional", 150, 150, 500, 500);
-        Render render = new Render(scene, imageWriter);
+        Render render = new Render(imageWriter,scene);
 
         render.renderImage();
         render.writeToImage();
@@ -69,7 +69,7 @@ public class LightsTests {
                 0.000001));
 
         ImageWriter imageWriter = new ImageWriter("spherePoint", 150, 150, 500, 500);
-        Render render = new Render(scene, imageWriter);
+        Render render = new Render(imageWriter,scene);
 
         render.renderImage();
         render.writeToImage();
@@ -98,7 +98,7 @@ public class LightsTests {
                 0.00000001));
 
         ImageWriter imageWriter = new ImageWriter("sphereSpot", 150, 150, 500, 500);
-        Render render = new Render(scene, imageWriter);
+        Render render = new Render(imageWriter,scene);
 
         render.renderImage();
         render.writeToImage();
@@ -124,7 +124,7 @@ public class LightsTests {
         scene.addLights(new DirectionalLight(new Color(300, 150, 150), new Vector(0, 0, 1)));
 
         ImageWriter imageWriter = new ImageWriter("trianglesDirectional", 200, 200, 500, 500);
-        Render render = new Render(scene, imageWriter);
+        Render render = new Render(imageWriter,scene);
 
         render.renderImage();
         render.writeToImage();
@@ -152,7 +152,7 @@ public class LightsTests {
                 1, 0.0005, 0.0005));
 
         ImageWriter imageWriter = new ImageWriter("trianglesPoint", 200, 200, 500, 500);
-        Render render = new Render(scene, imageWriter);
+        Render render = new Render(imageWriter,scene);
 
         render.renderImage();
         render.writeToImage();
@@ -179,7 +179,7 @@ public class LightsTests {
                 new Point3D(10, 10, 130),new Vector(-2, 2, 1), 1, 0.0001, 0.000005));
 
         ImageWriter imageWriter = new ImageWriter("trianglesSpot", 200, 200, 500, 500);
-        Render render = new Render(scene, imageWriter);
+        Render render = new Render(imageWriter,scene);
 
         render.renderImage();
         imageWriter.writeToImage();
@@ -213,7 +213,7 @@ public class LightsTests {
                 new Point3D(10, 10, 120),
                 1, 0.0005, 0.0005));
         ImageWriter imageWriter = new ImageWriter("trianglesDirectionalSpotPoint", 200, 200, 500, 500);
-        Render render = new Render(scene, imageWriter);
+        Render render = new Render(imageWriter,scene);
 
 
 
@@ -243,7 +243,7 @@ public class LightsTests {
         scene.addLights(new PointLight(new Color(100, 200, 900), new Point3D(60, 60, 10), 1, 0.00009, 0.000001));
 
         ImageWriter imageWriter = new ImageWriter("sphereSpotDirectionalPoint", 150, 150, 500, 500);
-        Render render = new Render(scene, imageWriter);
+        Render render = new Render(imageWriter,scene);
 
         render.renderImage();
         imageWriter.writeToImage();

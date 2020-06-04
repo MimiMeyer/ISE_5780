@@ -2,20 +2,27 @@
 package primitives;
 import static primitives.Util.isZero;
 public class Ray {
+    private static final double DELTA = 0.1;
     Point3D _p0;
     Vector _dir;
-
-
     public Point3D getTargetPoint(double length) {
         return isZero(length ) ? _p0 : _p0.add(_dir.scale(length));
     }
 
     /*****constructor********/
-    public Ray(Point3D _P0, Vector _dir) {
-        if (this.equals(_dir.length()!=1))
-            throw new IllegalArgumentException("dimensions disagree");
-        this._p0 = new Point3D(_P0);
-        this._dir = new Vector(_dir).normalized();
+    public Ray(Point3D point, Vector direction) {
+        _p0 = new Point3D(point);
+        _dir = new Vector(direction).normalized();
+    }
+
+    public Ray(Point3D point, Vector direction, Vector normal) {
+        //point + normal.scale(±DELTA)
+        _dir = new Vector(direction).normalized();
+
+        double nv = normal.dotProduct(direction);
+
+        Vector normalDelta = normal.scale((nv > 0 ? DELTA : -DELTA));
+        _p0 = point.add(normalDelta);
     }
     /**
      * Ray copy constructor- receives another Ray
