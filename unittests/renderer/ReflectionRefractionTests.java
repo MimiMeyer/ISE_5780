@@ -97,7 +97,7 @@ class ReflectionRefractionTests {
     }
 
     @Test
-    public void our_Image() {
+    public void our_image() {
         Scene scene = new Scene("odelia_Mimi");
         scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
         scene.setDistance(1000);
