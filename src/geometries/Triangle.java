@@ -9,7 +9,7 @@ import static primitives.Util.*;
 /**
  * Class Triangle is the basic class representing a triangle- extends Polygon class- it is a polygon with three vertices.
  * As a result this class also implements the Geometry interface.
- * @author Aviya and Sima
+ * 
  */
 public final class Triangle extends Polygon {
     /**
