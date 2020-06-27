@@ -35,7 +35,7 @@ public class Polygon extends Geometry {
 
     /**
      *
-     * @param vertices
+     * @param vertices point3d
      */
     public Polygon(Point3D... vertices) {
         super();
@@ -109,7 +109,7 @@ public class Polygon extends Geometry {
 
     /**
      * @param ray ray pointing toward a Gepmtry
-     * @return
+     * @return intersections
      */
     @Override
     public List<GeoPoint> findIntersections(Ray ray,double maxDistance) {

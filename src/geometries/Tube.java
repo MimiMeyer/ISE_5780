@@ -12,13 +12,17 @@ public class Tube extends RadialGeometry {
 
     protected final Ray _axisRay;
 
-    /***constructer***////
+    /***constructer*
+     * @param _radius radius
+     * @param _axisRay ray **////
     public Tube(double _radius, Ray _axisRay) {
         super(_radius);
         this._axisRay = new Ray(_axisRay);
     }
 
-    /***getter****/
+    /***getter*
+     * @return _axisRay
+     * ***/
     public Ray get_axisRay() {
         return _axisRay;
     }
@@ -56,8 +60,8 @@ public class Tube extends RadialGeometry {
     /**
      * find all intersections of received ray with the sphere
      *
-     * @param ray
-     * @return list of GeopPoints- intersection points with the sphere
+     * @param ray ray
+     * @return list of GeopPoints- intersection points with the tube
      */
 
 

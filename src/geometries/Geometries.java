@@ -35,7 +35,8 @@ import java.util.List;
 
     /**
      * the function gets a ray and returns a list of intersection points with all the geometries collection
-     * @param ray
+     * @param ray type ray
+     * @param maxDistance type double
      * @return list of Point3D that intersect the osef
      */
         @Override

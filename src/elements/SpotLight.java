@@ -8,7 +8,7 @@ import primitives.Vector;
 public class SpotLight extends PointLight {
     Vector _direction;
     double _concentration;
-
+/*constructors*/
     public SpotLight(Color colorIntensity, Point3D position, Vector direction, double kC, double kL, double kQ, double concentration) {
         super(colorIntensity, position, kC, kL, kQ);
         this._direction = new Vector(direction).normalized();
@@ -18,7 +18,7 @@ public class SpotLight extends PointLight {
         this(colorIntensity, position, direction, kC, kL, kQ, 1);
     }
 
-
+/*getters*/
     @Override
     public Color getIntensity(Point3D p) {
         double projection = _direction.dotProduct(getL(p));

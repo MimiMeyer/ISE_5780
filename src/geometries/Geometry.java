@@ -11,7 +11,9 @@ public abstract class Geometry implements Intersectable {
 
     public abstract Vector getNormal(Point3D point);
 
-    /***getter***/
+    /***getter*
+     * @return emission
+     * **/
     public Color get_emmission() {
         return _emmission;
     }
@@ -21,7 +23,9 @@ public abstract class Geometry implements Intersectable {
     }
 
 
-    /***constructor****/
+    /***constructor*
+     * @param emmission emmission
+     * @param _material matrerial ***/
 
     public Geometry(Color emmission, Material _material) {
         _emmission = new Color(emmission);

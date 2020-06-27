@@ -7,7 +7,7 @@ import primitives.Vector;
 public class PointLight extends Light implements LightSource{
 Point3D _position;
 double _kC,_kL,kQ;
-
+/*constructors*/
     public PointLight(Color _intensity, Point3D _postion, double _kC, double _kL, double kQ) {
         super(_intensity);
         this._position = new Point3D(_postion);
@@ -18,6 +18,7 @@ double _kC,_kL,kQ;
     public PointLight(Color colorIntensity, Point3D position) {
         this(colorIntensity, position, 1d, 0d, 0d);
     }
+    /*getters*/
     @Override
     public Color getIntensity() {
         return super.getIntensity();

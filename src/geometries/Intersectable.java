@@ -9,12 +9,17 @@ public interface Intersectable {
     public static class GeoPoint {
         protected Geometry geometry;
         protected Point3D point;
-/***constructor***/
+/***constructor*
+ * @param point  type point3d
+ * @param geometry type geometry
+ * **/
         public GeoPoint(Geometry geometry, Point3D point) {
             this.geometry = geometry;
             this.point = point;
         }
-/****getters***/
+/****getters*
+ * @return geomatry
+ **/
         public Geometry getGeometry() {
             return geometry;
         }
@@ -33,7 +38,7 @@ public interface Intersectable {
     }
     /**
      * find all intersections of received ray with the sphere
-     * @param ray
+     * @param ray ray
      * @return list of GeopPoints- intersection points with the sphere
      */
 

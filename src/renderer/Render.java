@@ -7,6 +7,7 @@ import geometries.Intersectable;
 import primitives.*;
 import scene.Scene;
 
+
 import java.util.List;
 
 import static geometries.Intersectable.GeoPoint;
@@ -20,6 +21,7 @@ public class Render {
     private static final int MAX_CALC_COLOR_LEVEL = 50;
     private static final double MIN_CALC_COLOR_K = 0.0000001;
     private static final double DELTA = 0.1;
+    private double _supersamplingDensity = 0d;
     private  Scene _scene;
     private final ImageWriter _imageWriter;
 
@@ -60,6 +62,7 @@ public class Render {
      * Printing the grid with a fixed interval between lines
      *
      * @param interval The interval between the lines.
+     *  @param colorsep gets the color
      */
     public void printGrid(int interval, java.awt.Color colorsep) {
         double rows = this._imageWriter.getNy();
@@ -90,20 +93,54 @@ public class Render {
         int Nx = _imageWriter.getNx();
         int Ny = _imageWriter.getNy();
 
-        for (int row = 0; row < Ny; row++) {
-            for (int collumn = 0; collumn < Nx; collumn++) {
-                Ray ray = camera.constructRayThroughPixel(Nx, Ny, collumn, row, distance, width, height);
-                GeoPoint closestPoint = findClosestIntersection(ray);
-                if (closestPoint == null) {
-                    _imageWriter.writePixel(collumn, row, background);
-                } else {
-                    _imageWriter.writePixel(collumn, row, calcColor(closestPoint, ray).getColor());
+        if (_supersamplingDensity != 0d) {
+            for (int row = 0; row < Ny; ++row) {
+                for (int column = 0; column < Nx; ++column) {
+                    Ray ray = camera.constructRayThroughPixel(Nx, Ny, column, row, distance, width, height);
+                    List<GeoPoint> intersectionPoints = geometries.findIntersections(ray);
+                    if (intersectionPoints == null) {
+                        _imageWriter.writePixel(column, row, background);
+                    } else {
+                        GeoPoint closestPoint = getClosestPoint(intersectionPoints);
+                        java.awt.Color pixelColor = calcColor(closestPoint, ray).getColor();
+                        _imageWriter.writePixel(column, row, pixelColor);
+                    }
+                }
+            }
+        }
+        else {
+            for (int row = 0; row < Ny; ++row) {
+                for (int column = 0; column < Nx; ++column) {
+                    List<Ray> rays = camera.constructMultipleRaysThroughPixel(Nx, Ny, column, row, distance, width, height);
+                    Color color=Color.BLACK;
+                    double counter =0;
+                    for (Ray ray : rays){
+                        GeoPoint intersectionPoint=findClosestIntersection(ray);
+                        if (intersectionPoint == null){
+                            color = color.add(_scene.getBackground());
+                        }
+                        else{
+                            counter++;
+                            color = color.add(calcColor(intersectionPoint, ray));
+                        }
+                    }
+                    Color color1;
+                    if (counter==0)
+                        color1=new Color(background);
+                    else
+                    {
+                        color1=color;
+                        color1=color1.scale(1d/rays.size());
+                    }
+                    _imageWriter.writePixel(column, row, color1.getColor());
                 }
             }
         }
     }
 
-    private GeoPoint getClosestPoint(List<GeoPoint> intersectionPoints) {
+
+
+        private GeoPoint getClosestPoint(List<GeoPoint> intersectionPoints) {
 
         if (intersectionPoints == null) {
             return null;
@@ -156,6 +193,7 @@ public class Render {
         }
         return closestPoint;
     }
+
 
     private Color calcColor(GeoPoint geoPoint, Ray inRay) {
         Color color = calcColor(geoPoint, inRay, MAX_CALC_COLOR_LEVEL, 1.0);
@@ -238,7 +276,7 @@ public class Render {
     }
 
     private Ray constructReflectedRay(Point3D pointGeo, Ray inRay, Vector n) {
-        //𝒓=𝒗 −𝟐∙(𝒗∙𝒏)∙𝒏
+
         Vector v = inRay.getDirection();
         double vn = v.dotProduct(n);
 
@@ -345,6 +383,8 @@ public class Render {
         }
         return ktr;
     }
+
+
 
 
 }

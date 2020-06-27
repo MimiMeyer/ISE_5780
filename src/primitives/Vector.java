@@ -8,7 +8,7 @@ public class Vector  {
 /******constructers*********/
 
     /**
-     * @param p
+     * @param p point3d
      */
     public Vector(Point3D p) {
         if (p.equals(Point3D.ZERO)) {
@@ -18,7 +18,7 @@ public class Vector  {
     }
 
     /**
-     * @param v
+     * @param v vector
      */
     public Vector(Vector v) {
         this(v._head);
@@ -32,12 +32,17 @@ public class Vector  {
         this(new Point3D(x,y,z));
     }
 
-    /************getter*********/
+    /************getter
+     * **
+     * @return  _head
+     * *******/
     public Point3D get_head() {
         return _head;
     }
 
-    /************setter*********/
+    /************setter**
+     * @param _head setter for point 3d _head
+     * *******/
     public void set_head(Point3D _head) {
         this._head = _head;
     }
@@ -58,7 +63,8 @@ public class Vector  {
         return Objects.equals(_head, vector._head);
     }
     /****add*
-     * @return*
+     * @return vector plus other vector
+     * *
      * @param other *
      * **/
     public Vector add(Vector other){
@@ -69,23 +75,32 @@ public class Vector  {
     }
     /***
      * *subtract
-     * @return*****/
+     * @return vector minus the other vector
+     * @param other vector to be used to sustract from original vector
+     * *****/
     public Vector subtract(Vector other){
         return new Vector(new Point3D(this._head._x._coord-other._head._x.get(),this._head._y._coord-other._head._y.get(),this._head._z._coord-other._head._z.get()));
 
     }
-    /****scale****/
+    /****scale*
+     * @return  vector times a number
+     * @param n number which will be used to time the vector***/
     public Vector scale(double n){
         return new Vector(new Point3D(this._head._x._coord*n,this._head._y._coord*n,this._head._z._coord*n));
 
 }
-/*****dotproduct****/
+/*****dotproduct*
+ * @return  returns a number of type double
+ * @param other othe vector to use for dot product
+ * ***/
     public double dotProduct(Vector other)
     {
         return this._head._x._coord*other._head._x._coord+this._head._y._coord*other._head._y._coord+this._head._z._coord*other._head._z._coord;
     }
     /****crossProduct
-     * @return*****/
+     * @return Vector
+     * @param other vector to use inorder yo do the crossproduct
+     * *****/
     public Vector crossProduct (Vector other)
     {
         double w1 = this._head._y._coord * other._head._z._coord - this._head._z._coord * other._head._y._coord;
@@ -96,19 +111,25 @@ public class Vector  {
     }
 
     /****lengthSquared**
-     * @return********/
+     * @return lengthSquared*
+     * ********/
 
     public double	lengthSquared (){
         return this.dotProduct(this);
 
     }
 
-    /****length*****/
+    /****length**
+     * @return length
+     * ***/
     public double length (){
 
         return Math.sqrt(this.lengthSquared());
     }
-    /*****normalize***/
+    /*****normalize***
+     * @return normalized vector
+     */
+
     public Vector normalize( )
     {
         Vector _v=new Vector(new Point3D(this._head._x._coord/this.length(),this._head._y._coord/this.length(),this._head._z._coord/this.length()));

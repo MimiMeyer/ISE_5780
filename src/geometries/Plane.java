@@ -10,7 +10,14 @@ public class Plane extends Geometry {
     primitives.Vector _normal;
 
 
-    /***constructer***/
+    /***constructer*
+
+     *@param material type matirel
+    * @param emmission type color
+    * @param p1 point3d
+     * @param p2 point3d
+     * @param p3  point3d
+     * **/
     public Plane(Color emmission, Material material,Point3D p1, Point3D p2, Point3D p3) {
         this._emmission = new Color(emmission);
         this._material= material;
@@ -55,7 +62,9 @@ public class Plane extends Geometry {
     public Vector getNormal() {
         return getNormal(null);
     }
-/***getters*****/
+/***getters*
+ * @return new point3d
+ * ****/
     public Point3D getPoint() {
         return new Point3D(_point);
     }
@@ -67,7 +76,13 @@ public class Plane extends Geometry {
                 ", _normal=" + _normal +
                 '}';
     }
-
+    /**
+     * find all intersections of received ray with the sphere
+     *
+     * @param ray  type ray
+     * @param maxDistance  type double is the maximum distance
+     * @return list of GeopPoints- intersection points with the plane
+     */
     @Override
     public List<GeoPoint> findIntersections(Ray ray,double maxDistance) {
         Vector p0Q;

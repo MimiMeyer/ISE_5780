@@ -9,7 +9,11 @@ public class Ray {
         return isZero(length ) ? _p0 : _p0.add(_dir.scale(length));
     }
 
-    /*****constructor********/
+    /*****constructor*
+     * @param direction tyoe vector
+     * @param point tyor point3d
+     * *******/
+
     public Ray(Point3D point, Vector direction) {
         _p0 = new Point3D(point);
         _dir = new Vector(direction).normalized();
@@ -33,7 +37,9 @@ public class Ray {
         this._p0 = new Point3D(_other._p0);
         this._dir = new Vector(_other._dir);
     }
-/*******getters and setters*********/
+/*******getters and setters**
+ * @return _p0,_dir *******/
+
     public Point3D getPoint() {
         return _p0;
     }

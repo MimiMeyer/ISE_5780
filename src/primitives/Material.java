@@ -6,7 +6,11 @@ public class Material {
     double _kT;
     double _kR;
     int _nShininess;
-/***constructor***/
+/***constructor*
+ * @param _kD type double
+ * @param _kS  type ks
+ * @param _nShininess type int
+ * **/
 public Material(double _kD, double _kS, int _nShininess) {
     this(_kD, _kS, _nShininess, 0, 0);
 }
@@ -17,7 +21,9 @@ public Material(double _kD, double _kS, int _nShininess) {
         this._kR=_kR;
         this._nShininess = _nShininess;
     }
-/***getters***/
+/***getters*
+ * @return _kd,_ks,_kt,_kr,_nShinieness
+ * **/
     public double get_kD() {
         return _kD;
     }

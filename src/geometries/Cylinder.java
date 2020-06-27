@@ -10,12 +10,17 @@ import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 public class Cylinder extends Tube {
  double _height;
-/***constructer***/
+/***constructer*
+ * @param _axisRay type ray
+ * @param _radius radius
+ * @param _height height  **/
     public Cylinder(double _radius, Ray _axisRay,double _height) {
         super(_radius,_axisRay);
         this._height = _height;
     }
-/***getter****/
+/***getter**
+ * @return height
+ * **/
     public double get_height() {
         return _height;
     }

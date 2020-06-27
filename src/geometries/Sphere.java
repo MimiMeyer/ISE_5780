@@ -19,7 +19,7 @@ public class Sphere extends RadialGeometry {
      *
      * @param radius the radius of the sphere
      * @param center the center point of the sphere
-     * @throws Exception in case of negative or zero radius from RadialGeometry constructor
+
      */
     public Sphere(double radius, Point3D center) {
         super(radius);
@@ -85,7 +85,8 @@ public class Sphere extends RadialGeometry {
     /**
      * find all intersections of received ray with the sphere
      *
-     * @param rayn
+     * @param ray  type ray
+     * @param maxDistance  type double is the maximum distance
      * @return list of GeopPoints- intersection points with the sphere
      */
 

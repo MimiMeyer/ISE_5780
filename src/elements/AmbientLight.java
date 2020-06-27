@@ -5,7 +5,8 @@ public class AmbientLight extends Light{
 
   //double _kA;
 
-/*CONSTRUCTORS*/
+/*CONSTRUCTORS
+* */
     public AmbientLight(Color _IA, double _kA) {
         super(_IA.scale(_kA));
 
