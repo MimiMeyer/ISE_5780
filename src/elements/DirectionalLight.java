@@ -1,8 +1,6 @@
 package elements;
 
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Vector;
+import primitives.*;
 /*constructor*/
 public class DirectionalLight extends Light implements LightSource {
     private Vector _direction;

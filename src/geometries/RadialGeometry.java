@@ -1,6 +1,5 @@
 package geometries;
-import primitives.Color;
-import primitives.Material;
+import primitives.*;
 
 import static primitives.Util.isZero;
 

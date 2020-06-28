@@ -2,8 +2,7 @@
 // Odelia Sfez 342472966
 package geometries;
 import primitives.Point3D;
-        import primitives.Vector;
-        import primitives.Ray;
+        import primitives.*;
         import org.junit.jupiter.api.Test;
         import static org.junit.jupiter.api.Assertions.*;
 public class CylinderTest extends Object {

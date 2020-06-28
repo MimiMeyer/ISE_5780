@@ -1,7 +1,7 @@
 
 package geometries;
 
-import primitives.Ray;
+import primitives.*;
 
 import java.util.ArrayList;
 import java.util.List;

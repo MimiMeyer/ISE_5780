@@ -1,15 +1,10 @@
 package elements;
 
-import geometries.Sphere;
-import geometries.Triangle;
+import geometries.*;
 import org.junit.jupiter.api.Test;
-import primitives.Color;
-import primitives.Material;
-import primitives.Point3D;
-import primitives.Vector;
-import renderer.ImageWriter;
-import renderer.Render;
-import scene.Scene;
+import primitives.*;
+import renderer.*;
+import scene.*;
 
 
 

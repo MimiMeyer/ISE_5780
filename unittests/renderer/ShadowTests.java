@@ -1,16 +1,10 @@
 
 package renderer;
-import elements.AmbientLight;
-import elements.Camera;
-import elements.SpotLight;
-import geometries.Sphere;
-import geometries.Triangle;
+import elements.*;
+import geometries.*;
 import org.junit.jupiter.api.Test;
-import primitives.Color;
-import primitives.Material;
-import primitives.Point3D;
-import primitives.Vector;
-import scene.Scene;
+import primitives.*;
+import scene.*;
 
 /**
  * Testing basic shadows

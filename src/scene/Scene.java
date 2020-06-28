@@ -1,10 +1,7 @@
 package scene;
-import elements.AmbientLight;
-import elements.Camera;
-import elements.LightSource;
-import geometries.Geometries;
-import geometries.Intersectable;
-import primitives.Color;
+import elements.*;
+import geometries.*;
+import primitives.*;
 
 import java.util.LinkedList;
 import java.util.List;

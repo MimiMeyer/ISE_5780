@@ -1,9 +1,6 @@
 package elements;
 
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Util;
-import primitives.Vector;
+import primitives.*;
 
 public class SpotLight extends PointLight {
     Vector _direction;

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import elements.*;
 import geometries.*;
 import primitives.*;
-import scene.Scene;
+import scene.*;
 
 /**
  * Test rendering abasic image

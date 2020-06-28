@@ -1,8 +1,6 @@
 package elements;
 
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Vector;
+import primitives.*;
 
 public class PointLight extends Light implements LightSource{
 Point3D _position;

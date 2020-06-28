@@ -1,9 +1,6 @@
 package elements;
 
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Util;
-import primitives.Vector;
+import primitives.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -60,8 +57,8 @@ public class Camera {
         Point3D Pc = new Point3D( _p0.add(_vTo.scale(screenDistance)));
         double Ry = screenHeight/nY;
         double Rx = screenWidth/nX;
-        double yi =  ((i - nY/2d)*Ry + Ry/2d);
-        double xj=   ((j - nX/2d)*Rx + Rx/2d);
+        double yi =  ((i - nY/2d)*Ry + Ry/2d);//middle height of pixel
+        double xj=   ((j - nX/2d)*Rx + Rx/2d);//middle width of pixel
 
         Point3D Pij = Pc;
 
@@ -74,47 +71,52 @@ public class Camera {
             Pij = Pij.add(_vUp.scale(-yi));
         }
         Vector Vij = Pij.subtract(_p0);
-        return new Ray(_p0,Vij);
+        return new Ray(_p0,Vij); //will return the ray in middle of the pixel
     }
 
 /*constructs 100 rays throgh same pixel each time moving a bit within the pixel*/
     public List<Ray> constructMultipleRaysThroughPixel(int nX, int nY, int j, int i, double screenDistance,
                                                double screenWidth, double screenHeight)
     {
-        if (isZero(screenDistance))
+        if (isZero(screenDistance))//screen distance can't be zero
         {
             throw new IllegalArgumentException("distance cannot be 0");
         }
 
-    List<Ray> rays = new ArrayList<>();
+    List<Ray> rays = new ArrayList<>();//creating a new list of rays
         Point3D Pc = new Point3D( _p0.add(_vTo.scale(screenDistance)));
-    double Ry = screenHeight/nY;
-    double Rx = screenWidth/nX;
-    double yi =  ((i - nY/2d)*Ry);
-    double xj=   ((j - nX/2d)*Rx);
-      int multipleRays=100;
+    double Ry = screenHeight/nY; //height of the pixel
+    double Rx = screenWidth/nX;//Width of the pixel
+    double yi =  ((i - nY/2d)*Ry); // yi distance of original pixel from (0,0) on Y axis
+    double xj=   ((j - nX/2d)*Rx);//xj distance of original pixel from (0,0) on X axis
+      int multipleRays=100;//num of rays
         for (int count = 0; count < multipleRays; ++count) {
 
-            double y =  rnd.nextDouble();
-            double x=   rnd.nextDouble();
-
+            double minY =-Ry;//minimum height of the pixel
+            double maxY=Ry;//maximum height of the pixel
+            double minX=-Rx;//minimum width of the pixel
+            double maxX=Rx;//maximum width of the pixel
+            double randomY =   rnd.nextDouble() ;//generates random number between 0-1
+            double randomX=   rnd.nextDouble();//generates random number between 0-1
+            double y=minY+(randomY*(maxY-minY));//y will be number between -Ry and Ry
+            double x=minX+(randomX*(maxX-minX));//x will be number between -Rx and Rx
             Point3D Pij = Pc;
 
-            if (!Util.isZero(x + xj))
+            if (!Util.isZero(x + xj))//if x+xj  doesnt equel zero do the next line
             {
-                Pij = Pij.add(_vRight.scale(x + xj));
+                Pij = Pij.add(_vRight.scale(x + xj));//will move the ray along the width of the pixel.
             }
-            if (!Util.isZero(y + yi))
+            if (!Util.isZero(y + yi))//if y+yi doesnt equel zero do the next line
             {
-                Pij = Pij.add(_vUp.scale(-y -yi ));
+                Pij = Pij.add(_vUp.scale(-y -yi ));//will move the ray along the hight of the pixel.
             }
             Vector Vij = Pij.subtract(_p0);
            Ray r=new Ray(_p0,Vij);
 
-           rays.add(r);
+           rays.add(r);//adds new ray to list
         }
 
-        return rays;
+        return rays;//returns full list of rays
 }
 
 

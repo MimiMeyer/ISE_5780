@@ -3,9 +3,7 @@
 package geometries;
 
 import org.junit.jupiter.api.Test;
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
+import primitives.*;
 
 import java.util.ArrayList;
 import java.util.List;

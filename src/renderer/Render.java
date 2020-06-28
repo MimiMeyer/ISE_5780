@@ -1,12 +1,9 @@
 package renderer;
 
-import elements.AmbientLight;
-import elements.Camera;
-import elements.LightSource;
-import geometries.Intersectable;
+import elements.*;
+import geometries.*;
 import primitives.*;
 import scene.Scene;
-
 
 import java.util.List;
 
@@ -81,6 +78,11 @@ public class Render {
         _imageWriter.writeToImage();
     }
 
+    /**
+     * gets the information needed for the pic if _supersamplingDensity doesnt = 0d then the functiom will be sent to renderingRay
+     * and if it does it will be sent to renderingSupersamplingRays
+
+     */
     public void renderImage() {
         Camera camera = _scene.getCamera();
         Intersectable geometries = _scene.getGeometries();
@@ -94,53 +96,80 @@ public class Render {
         int Ny = _imageWriter.getNy();
 
         if (_supersamplingDensity != 0d) {
-            for (int row = 0; row < Ny; ++row) {
-                for (int column = 0; column < Nx; ++column) {
-                    Ray ray = camera.constructRayThroughPixel(Nx, Ny, column, row, distance, width, height);
-                    List<GeoPoint> intersectionPoints = geometries.findIntersections(ray);
-                    if (intersectionPoints == null) {
-                        _imageWriter.writePixel(column, row, background);
-                    } else {
-                        GeoPoint closestPoint = getClosestPoint(intersectionPoints);
-                        java.awt.Color pixelColor = calcColor(closestPoint, ray).getColor();
-                        _imageWriter.writePixel(column, row, pixelColor);
-                    }
-                }
-            }
+            renderingRay(camera, geometries, background, distance, width, height, Nx, Ny);
         }
         else {
-            for (int row = 0; row < Ny; ++row) {
-                for (int column = 0; column < Nx; ++column) {
-                    List<Ray> rays = camera.constructMultipleRaysThroughPixel(Nx, Ny, column, row, distance, width, height);
-                    Color color=Color.BLACK;
-                    double counter =0;
-                    for (Ray ray : rays){
-                        GeoPoint intersectionPoint=findClosestIntersection(ray);
-                        if (intersectionPoint == null){
-                            color = color.add(_scene.getBackground());
-                        }
-                        else{
-                            counter++;
-                            color = color.add(calcColor(intersectionPoint, ray));
-                        }
+            renderingSupersamplingRays(camera, background, distance, width, height, Nx, Ny);
+        }
+    }
+/**this function does the sumpersameling it gets a list of rays then caculates the ray color if the find intersection= null then its the backround color
+ * and if not it averages out the rays and returns the color of the pixel
+ * @param background color of backround
+ *    @param camera camera
+ *    @param distance distance
+ *    @param height View Plane height in size units
+ *    @param nx amount of pixels by Width
+ *    @param ny amount of pixels by height
+ *    @param width View Plane width in size units*/
+    private void renderingSupersamplingRays(Camera camera, java.awt.Color background, double distance, double width, double height, int nx, int ny) {
+        for (int row = 0; row < ny; ++row) {
+            for (int column = 0; column < nx; ++column) {
+                List<Ray> rays = camera.constructMultipleRaysThroughPixel(nx, ny, column, row, distance, width, height);//calling the function constructMultipleRaysThroughPixel and sending the row and collum which are the i and j
+                Color color= Color.BLACK;
+                double counter =0;
+                for (Ray ray : rays){
+                    GeoPoint intersectionPoint=findClosestIntersection(ray);
+                    if (intersectionPoint == null){
+                        color = color.add(_scene.getBackground());//if findClosestIntersection=null it means there is no shape so the color is the backround color
                     }
-                    Color color1;
-                    if (counter==0)
-                        color1=new Color(background);
-                    else
-                    {
-                        color1=color;
-                        color1=color1.scale(1d/rays.size());
+                    else{
+                        counter++;
+                        color = color.add(calcColor(intersectionPoint, ray));//caculates the color of the ray
                     }
-                    _imageWriter.writePixel(column, row, color1.getColor());
+                }
+                Color color1;
+                if (counter==0)
+                    color1=new Color(background);//if counter=0 it means there are no shapes so its the backround color
+                else
+                {
+                    color1=color;
+                    color1=color1.scale(1d/rays.size());//gets the average of the rays color
+                }
+                _imageWriter.writePixel(column, row, color1.getColor());//gives caculated color to pixel
+            }
+        }
+    }
+
+    /**
+     **this function  caculates the pixels color if the find intersection= null then its the backround color
+     *  * and if not it caculates the rays color and thats the color of the pixel
+     * @param camera
+     * @param geometries
+     * @param background
+     * @param distance
+     * @param width
+     * @param height
+     * @param nx
+     * @param ny
+     */
+    private void renderingRay(Camera camera, Intersectable geometries, java.awt.Color background, double distance, double width, double height, int nx, int ny) {
+        for (int row = 0; row < ny; ++row) {
+            for (int column = 0; column < nx; ++column) {
+                Ray ray = camera.constructRayThroughPixel(nx, ny, column, row, distance, width, height);
+                List<GeoPoint> intersectionPoints = geometries.findIntersections(ray);
+                if (intersectionPoints == null) {
+                    _imageWriter.writePixel(column, row, background);////if findClosestIntersection=null it means there is no shape so the color is the backround color
+                } else {
+                    GeoPoint closestPoint = getClosestPoint(intersectionPoints);//find the shape
+                    java.awt.Color pixelColor = calcColor(closestPoint, ray).getColor();//find the color of the ray
+                    _imageWriter.writePixel(column, row, pixelColor);//gives caculated color to pixel
                 }
             }
         }
     }
 
 
-
-        private GeoPoint getClosestPoint(List<GeoPoint> intersectionPoints) {
+    private GeoPoint getClosestPoint(List<GeoPoint> intersectionPoints) {
 
         if (intersectionPoints == null) {
             return null;
