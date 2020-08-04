@@ -12,11 +12,14 @@ public class miniProjectTest {
         Scene scene = new Scene("odelia_Mimi");
         scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
         scene.setDistance(1000);
-        scene.setBackground(new Color(java.awt.Color.GRAY));
+        scene.setBackground(Color.BLACK);
         scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
 
         scene.addGeometries(
-
+//pyramid
+                new Triangle(new Color(255,255,255), new Material(0.8, 0.8, 30, 1, 0), new Point3D(-10,30,0), new Point3D(30,30,0), new Point3D(0,-30,10)),
+                new Triangle(new Color(255,255,255), new Material(0.8, 0.8, 30, 1, 0), new Point3D(30,30,0), new Point3D(-10,30,30), new Point3D(0,-30,10)),
+                new Triangle(new Color(java.awt.Color.ORANGE), new Material(0.8, 0.8, 30, 1, 0), new Point3D(-10,30,0), new Point3D(-30,30,30), new Point3D(0,-30,10)),
 //middle sphereinsphere
                 new Sphere(100, new Point3D(0, 0, -200),new Color(java.awt.Color.BLUE), new Material(0.8, 0.8, 30, 0.8, 0)),
                 new Sphere(80,  new Point3D(0, 0, -200), new Color(java.awt.Color.BLUE), new Material(0.8, 0.8, 30, 0.8, 0)),
